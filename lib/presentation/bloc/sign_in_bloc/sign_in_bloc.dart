@@ -1,12 +1,15 @@
-library;
+library sign_in_bloc;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sign_in_app/domain/usecases/sign_in_usecase.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc() : super(SignInInitial()) {
+  final SignInUseCase signInUseCase;
+
+  SignInBloc({required this.signInUseCase}) : super(SignInInitial()) {
     on<SignInButtonPressed>(_onSignInButtonPressed);
     on<GoogleSignInButtonPressed>(_onGoogleSignInButtonPressed);
   }
@@ -17,6 +20,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     emit(SignInLoading());
     try {
+      await signInUseCase.signInWithEmailAndPassword(event.email, event.password);
       emit(SignInSuccess());
     } catch (e) {
       emit(SignInFailure(error: e.toString()));
@@ -29,6 +33,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     emit(SignInLoading());
     try {
+      await signInUseCase.signInWithGoogle();
       emit(SignInSuccess());
     } catch (e) {
       emit(SignInFailure(error: e.toString()));
