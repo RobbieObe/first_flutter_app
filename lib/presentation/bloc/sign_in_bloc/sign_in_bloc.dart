@@ -1,4 +1,4 @@
-library sign_in_bloc;
+library;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -6,6 +6,8 @@ class SignInPage extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  SignInPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
