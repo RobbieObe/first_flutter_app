@@ -12,4 +12,8 @@ class SignInUseCase {
   Future<String> signInWithGoogle() async {
     return await repository.signInWithGoogle();
   }
+
+  Future<void> signOut() async {
+    return await repository.signOut();
+  }
 }

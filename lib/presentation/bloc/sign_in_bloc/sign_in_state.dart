@@ -8,12 +8,12 @@ class SignInLoading extends SignInState {}
 
 class SignInSuccess extends SignInState {
   final String email;
-
   SignInSuccess({required this.email});
 }
 
+class SignOutSuccess extends SignInState {}
+
 class SignInFailure extends SignInState {
   final String error;
-
   SignInFailure({required this.error});
 }

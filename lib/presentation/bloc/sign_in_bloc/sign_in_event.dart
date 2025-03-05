@@ -10,3 +10,5 @@ class SignInButtonPressed extends SignInEvent {
 }
 
 class GoogleSignInButtonPressed extends SignInEvent {}
+
+class SignOutButtonPressed extends SignInEvent {}

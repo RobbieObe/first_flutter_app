@@ -12,6 +12,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc({required this.signInUseCase}) : super(SignInInitial()) {
     on<SignInButtonPressed>(_onSignInButtonPressed);
     on<GoogleSignInButtonPressed>(_onGoogleSignInButtonPressed);
+    on<SignOutButtonPressed>(_onSignOutButtonPressed);
   }
 
   Future<void> _onSignInButtonPressed(
@@ -39,4 +40,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(SignInFailure(error: e.toString()));
     }
   }
+
+  Future<void> _onSignOutButtonPressed(
+  SignOutButtonPressed event,
+  Emitter<SignInState> emit,
+) async {
+  emit(SignInLoading());
+  try {
+    await signInUseCase.signOut();
+    emit(SignOutSuccess());
+  } catch (e) {
+    emit(SignInFailure(error: e.toString()));
+  }
+}
 }
