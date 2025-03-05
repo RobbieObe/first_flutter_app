@@ -14,9 +14,7 @@ class SignInPage extends StatelessWidget {
       body: BlocConsumer<SignInBloc, SignInState>(
         listener: (context, state) {
           if (state is SignInSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Sign In Successful')),
-            );
+            NavigationHelper.navigateToHome(context, state.email);
           } else if (state is SignInFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),
@@ -48,6 +46,13 @@ class SignInPage extends StatelessWidget {
                     );
                   },
                   child: Text('Sign In'),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<SignInBloc>().add(GoogleSignInButtonPressed());
+                  },
+                  child: Text('Sign In with Google'),
                 ),
                 SizedBox(height: 20),
                 TextButton(

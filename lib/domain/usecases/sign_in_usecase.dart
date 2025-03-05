@@ -9,7 +9,7 @@ class SignInUseCase {
     return await repository.signInWithEmailAndPassword(email, password);
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<String> signInWithGoogle() async {
     return await repository.signInWithGoogle();
   }
 }

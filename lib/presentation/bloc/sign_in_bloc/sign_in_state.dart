@@ -6,7 +6,11 @@ class SignInInitial extends SignInState {}
 
 class SignInLoading extends SignInState {}
 
-class SignInSuccess extends SignInState {}
+class SignInSuccess extends SignInState {
+  final String email;
+
+  SignInSuccess({required this.email});
+}
 
 class SignInFailure extends SignInState {
   final String error;

@@ -21,7 +21,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(SignInLoading());
     try {
       await signInUseCase.signInWithEmailAndPassword(event.email, event.password);
-      emit(SignInSuccess());
+      emit(SignInSuccess(email: event.email));
     } catch (e) {
       emit(SignInFailure(error: e.toString()));
     }
@@ -33,8 +33,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     emit(SignInLoading());
     try {
-      await signInUseCase.signInWithGoogle();
-      emit(SignInSuccess());
+      final email = await signInUseCase.signInWithGoogle();
+      emit(SignInSuccess(email: email));
     } catch (e) {
       emit(SignInFailure(error: e.toString()));
     }

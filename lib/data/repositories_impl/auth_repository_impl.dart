@@ -13,7 +13,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> signInWithGoogle() async {
+  Future<String> signInWithGoogle() async {
     return await remoteDataSource.signInWithGoogle();
   }
 

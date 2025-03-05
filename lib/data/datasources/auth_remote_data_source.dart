@@ -5,7 +5,7 @@ import '../models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<void> signInWithEmailAndPassword(String email, String password);
-  Future<void> signInWithGoogle();
+  Future<String> signInWithGoogle();
   Future<void> signUpWithEmailAndPassword(String email, String password);
   Future<User?> getCurrentUser();
   Future<void> signOut();
@@ -32,7 +32,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> signInWithGoogle() async {
+  Future<String> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser != null) {
@@ -47,6 +47,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         if (userCredential.user == null) {
           throw Exception('Google sign-in failed: No user returned');
         }
+        return userCredential.user!.email!;
       } else {
         throw Exception('Google sign-in failed: User canceled');
       }

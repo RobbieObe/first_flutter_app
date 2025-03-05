@@ -19,7 +19,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(SignUpLoading());
     try {
       await signUpUseCase.signUpWithEmailAndPassword(event.email, event.password);
-      emit(SignUpSuccess());
+      emit(SignUpSuccess(email: event.email));
     } catch (e) {
       emit(SignUpFailure(error: e.toString()));
     }
