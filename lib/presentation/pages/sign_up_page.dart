@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/sign_in_bloc/sign_in_bloc.dart';
+import '../bloc/sign_up_bloc/sign_up_bloc.dart';
 import '../../core/navigation_helper.dart';
 
-class SignInPage extends StatelessWidget {
+class SignUpPage extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign In')),
-      body: BlocConsumer<SignInBloc, SignInState>(
+      appBar: AppBar(title: Text('Sign Up')),
+      body: BlocConsumer<SignUpBloc, SignUpState>(
         listener: (context, state) {
-          if (state is SignInSuccess) {
+          if (state is SignUpSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Sign In Successful')),
+              SnackBar(content: Text('Sign Up Successful')),
             );
-          } else if (state is SignInFailure) {
+            // Redirect to Sign In Page after successful sign up
+            NavigationHelper.navigateToSignIn(context);
+          } else if (state is SignUpFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),
             );
@@ -40,23 +42,16 @@ class SignInPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    context.read<SignInBloc>().add(
-                      SignInButtonPressed(
+                    context.read<SignUpBloc>().add(
+                      SignUpButtonPressed(
                         email: _emailController.text,
                         password: _passwordController.text,
                       ),
                     );
                   },
-                  child: Text('Sign In'),
+                  child: Text('Sign Up'),
                 ),
-                SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    NavigationHelper.navigateToSignUp(context);
-                  },
-                  child: Text('Don\'t have an account? Sign Up'),
-                ),
-                if (state is SignInLoading) CircularProgressIndicator(),
+                if (state is SignUpLoading) CircularProgressIndicator(),
               ],
             ),
           );

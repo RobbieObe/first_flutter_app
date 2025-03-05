@@ -6,6 +6,7 @@ import '../models/user_model.dart';
 abstract class AuthRemoteDataSource {
   Future<void> signInWithEmailAndPassword(String email, String password);
   Future<void> signInWithGoogle();
+  Future<void> signUpWithEmailAndPassword(String email, String password);
   Future<User?> getCurrentUser();
   Future<void> signOut();
 }
@@ -51,6 +52,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
     } catch (e) {
       throw Exception('Google sign-in failed: ${e.toString()}');
+    }
+  }
+
+    @override
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (userCredential.user == null) {
+        throw Exception('Sign-up failed: No user returned');
+      }
+    } catch (e) {
+      throw Exception('Sign-up failed: ${e.toString()}');
     }
   }
   
