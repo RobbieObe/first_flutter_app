@@ -5,6 +5,7 @@ import 'package:sign_in_app/data/datasources/auth_remote_data_source.dart';
 import 'package:sign_in_app/data/repositories_impl/auth_repository_impl.dart';
 import 'package:sign_in_app/domain/usecases/sign_in_usecase.dart';
 import 'package:sign_in_app/domain/usecases/sign_up_usecase.dart';
+import 'package:sign_in_app/firebase_options.dart';
 import 'package:sign_in_app/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:sign_in_app/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:sign_in_app/presentation/pages/sign_in_page.dart';
@@ -12,7 +13,10 @@ import 'package:sign_in_app/presentation/pages/sign_up_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
