@@ -35,32 +35,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 
-  // @override
-  // Future<String> signInWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-  //     if (googleUser != null) {
-  //       final GoogleSignInAuthentication googleAuth =
-  //           await googleUser.authentication;
-  //       final firebase_auth.OAuthCredential credential = firebase_auth.GoogleAuthProvider.credential(
-  //         accessToken: googleAuth.accessToken,
-  //         idToken: googleAuth.idToken,
-  //       );
-  //       final userCredential =
-  //           await _firebaseAuth.signInWithCredential(credential);
-  //       if (userCredential.user == null) {
-  //         throw Exception('Google sign-in failed: No user returned');
-  //       }
-  //       return userCredential.user!.email!;
-  //     } else {
-  //       throw Exception('Google sign-in failed: User canceled');
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Google sign-in failed: ${e.toString()}');
-  //   }
-  // }
-
-   @override
+  @override
   Future<String> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -76,7 +51,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         if (userCredential.user == null) {
           throw Exception('Google sign-in failed: No user returned');
         }
-        return userCredential.user!.email!; // Return the user's email
+        return userCredential.user!.email!;
       } else {
         throw Exception('Google sign-in failed: User canceled');
       }
