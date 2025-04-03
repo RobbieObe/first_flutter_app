@@ -17,3 +17,9 @@ class SignInFailure extends SignInState {
   final String error;
   SignInFailure({required this.error});
 }
+
+class ProfilePictureUpdated extends SignInState {
+  final String imageUrl;
+
+  ProfilePictureUpdated({required this.imageUrl});
+}

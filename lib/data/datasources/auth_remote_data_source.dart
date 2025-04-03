@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../domain/entities/user.dart';
 import '../models/user_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class AuthRemoteDataSource {
   Future<void> signInWithEmailAndPassword(String email, String password);
@@ -94,5 +96,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
     await _googleSignIn.signOut();
+  }
+
+  Future<void> updateProfilePicture(String email, String imageUrl) async {
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(email)
+      .set({'profileImageUrl': imageUrl}, SetOptions(merge: true));
   }
 }

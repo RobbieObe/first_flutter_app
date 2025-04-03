@@ -12,3 +12,10 @@ class SignInButtonPressed extends SignInEvent {
 class GoogleSignInButtonPressed extends SignInEvent {}
 
 class SignOutButtonPressed extends SignInEvent {}
+
+class UpdateProfilePicture extends SignInEvent {
+  final String email;
+  final String imageUrl;
+
+  UpdateProfilePicture({required this.email, required this.imageUrl});
+}

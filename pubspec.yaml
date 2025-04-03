@@ -15,6 +15,10 @@ dependencies:
   firebase_core_web: any
   firebase_auth_web: any
   google_sign_in: ^6.1.5
+  firebase_storage: ^12.4.4
+  image_picker: ^0.8.7
+  cached_network_image: ^3.2.3
+  cloud_firestore: ^5.6.6
 
 dev_dependencies:
   flutter_test:
@@ -23,3 +27,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+         - assets/default_profile.png
